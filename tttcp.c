@@ -8,8 +8,9 @@
 
 #define dim 3
 char griglia[dim][dim];
-char carattere;
-char caratterebot = 'O';
+/* Carattere del giocatore 1 e 2 */
+char carattere1;
+char carattere2 = 'O';
 
 void inserisci(int x, int y, char scelta)
 {
@@ -24,12 +25,12 @@ void inserisciRandom()
 		x = rand() % 3;
 		y = rand() % 3;
 	} while(posizione_occupata(x, y) == 1);
-	griglia[x][y] = caratterebot;
+	griglia[x][y] = carattere2;
 }
 
 int posizione_occupata(int i, int j)
 {
-	if(griglia[i][j] == carattere || griglia[i][j] == caratterebot)
+	if(griglia[i][j] == carattere1 || griglia[i][j] == carattere2)
 		return 1;
 	return 0;
 }
@@ -99,7 +100,7 @@ int caselle_finite()
 	{
 		for(int j = 0; j < dim; ++j)
 		{
-			if(griglia[i][j] != carattere && griglia[i][j] != caratterebot)
+			if(griglia[i][j] != carattere1 && griglia[i][j] != carattere2)
 				return 0;
 		}
 	}
@@ -116,7 +117,7 @@ int main(int argc, char **argv)
 
 	printf("Benvenuto nel programma tttcp\n");
 	printf("Scegli che carattere vuoi usare: ");
-	scanf("%c", &carattere);
+	scanf("%c", &carattere1);
 	stampagriglia();
 
 	while(gioco)
@@ -125,6 +126,7 @@ int main(int argc, char **argv)
 		occupato = true;
 		x = 'a';
 		y = 1;
+		
 		do
 		{
 			do
@@ -144,20 +146,20 @@ int main(int argc, char **argv)
 			} while(y != 1 && y != 2 && y != 3);
 			y--;
 
-			if(griglia[charToInt(x)][y] != carattere && griglia[charToInt(x)][y] != caratterebot)
+			if(griglia[charToInt(x)][y] != carattere1 && griglia[charToInt(x)][y] != carattere2)
 				occupato = false;
 			else
 				printf("Attenzione! Posizione occupata, perfavore scegline un'altra\n");
 		} while(occupato);
 		
-		inserisci(charToInt(x), y, carattere);
+		inserisci(charToInt(x), y, carattere1);
 		stampagriglia();
 
 		/* Dato che l'utente ha sempre l'ultima mossa, controlla che le caselle non siano finite */
 		if(caselle_finite() == 1)
 			gioco = false;
 
-		if(vinto(carattere) == 1)
+		if(vinto(carattere1) == 1)
 		{
 			gioco = false;
 			printf("\nHai vinto!\n");
@@ -170,7 +172,7 @@ int main(int argc, char **argv)
 				inserisciRandom();
 				stampagriglia();
 			}
-			if(vinto(caratterebot) == 1)
+			if(vinto(carattere2) == 1)
 			{
 				gioco = false;
 				printf("\nHai perso!\n");
