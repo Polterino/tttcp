@@ -9,7 +9,7 @@
 #define dim 3
 char griglia[dim][dim];
 /* Carattere del giocatore 1 e 2 */
-char carattere1;
+char carattere1 = 'O';	// Serve solo ad inizializzarlo, comunque il giocatore sceglie cosa usare
 char carattere2 = 'O';
 
 void inserisci(int x, int y, char scelta)
@@ -37,13 +37,13 @@ int posizione_occupata(int i, int j)
 
 void stampagriglia()
 {
-	printf("   1   2   3\n");
+	printf("\n   1   2   3\n");
 	for(int i = 0; i < dim; ++i)
 	{
 		printf("%c ", i + 97);
 		for(int j = 0; j < dim; ++j)
 		{
-			if(griglia[i][j] != NULL)
+			if(griglia[i][j] == carattere1 || griglia[i][j] == carattere2)
 			{
 				if(j != dim - 1)
 					printf(" %c |", griglia[i][j]);
@@ -59,6 +59,7 @@ void stampagriglia()
 			}
 		}
 	}
+	printf("\n");
 }
 
 int charToInt(char var)
@@ -114,10 +115,9 @@ int main(int argc, char **argv)
 	int y;
 
 	srand(time(NULL));
-
 	printf("Benvenuto nel programma tttcp\n");
 	printf("Scegli che carattere vuoi usare: ");
-	scanf("%c", &carattere1);
+		scanf("%c", &carattere1);
 	stampagriglia();
 
 	while(gioco)
