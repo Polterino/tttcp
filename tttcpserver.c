@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 {
 	int l1, l2;	/* La grandezza della struct sockaddr_in dei due client */
 	struct sockaddr_in client1, client2;
-	
+
 	client1.sin_family = AF_INET;
 	client1.sin_port = htons(PORTA1);
 	client1.sin_addr.s_addr = INADDR_ANY;
