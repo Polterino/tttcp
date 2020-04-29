@@ -1,2 +1,4 @@
-tttcpserver
-tttcpclient
+/tttcp/nbproject/private/
+/tttcp/build/
+/tttcpClient/nbproject/private/
+/tttcpClient/build/
